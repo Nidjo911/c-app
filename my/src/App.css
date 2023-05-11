@@ -1,0 +1,14 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  border: 1px solid red;
+}
+
+.App-header {
+  background-color: green;
+  overflow: visible;
+  width: 100%;
+  text-align: center;
+}
