@@ -29,10 +29,6 @@ export default function Input(props) {
           autoFocus
         />
         <button><i class="bi bi-send"></i>Send</button>
-        <button type="button" class="btn btn-success">
-        <i class="bi bi-send"></i>
-          Send
-        </button>
       </form>
     </div>
   );

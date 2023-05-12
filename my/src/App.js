@@ -1,8 +1,7 @@
 import { nanoid } from 'nanoid';
-
 import './App.css';
 /* import './App.scss'; */
-import { Messages, Input } from './Components';
+import { Messages, Input, Header } from './Components';
 import { useState, useEffect } from 'react';
 
 
@@ -44,6 +43,7 @@ export default function App() {
   
   const [drone, setDrone] = useState(null);
 
+  const [chatters, setChatters] = useState ({});
 
 
   useEffect(() => {
@@ -52,6 +52,8 @@ export default function App() {
     });
 
     setDrone (myDrone);
+
+
   }, [])
 
   useEffect(() => {
@@ -75,6 +77,28 @@ export default function App() {
       console.log([messages]);
     } )
 
+    room.on("member_join", function (member) {
+      setMessages(prevMessages => [...prevMessages,
+        { data: 'joined the chat',
+          member: member.clientData,
+          timestamp: null,
+          id: nanoid()
+         }]);
+        
+        })
+
+        /* room on member join - kraj */
+    
+        room.on("member_leave", function (member) {
+
+          setMessages(prevMessages => [...prevMessages,
+            { data: 'has left the chat',
+              member: member.clientData,
+              timestamp: null,
+              id: nanoid()
+             }]);
+            
+            })
   });
 
   }
@@ -95,7 +119,7 @@ export default function App() {
       <div className='App-header'>
         <h1>My Chat App</h1>
       </div>
-
+      <Header />
       <Messages messages={messages} currentMember={member} />
       <Input onSendMessage={onSendMessage} />
     </div>

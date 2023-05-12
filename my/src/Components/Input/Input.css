@@ -1,24 +1,48 @@
   form {
     display: flex;
-    width: 100%;
+    width: 90vw;
     justify-content: space-between;
     max-width: 900px;
-    margin: 0 auto 40px;
+    margin: 7px auto 40px;
+
+    flex-wrap: wrap;
   }
   
   input {
-    padding: 5px;
-    font-size: 16px;
+    padding: 7px;
+
+    font-size: 15px;
     border-radius: 8px;
-    border: 1px solid orangered;
+
+    border: 1px solid darkgray;
     flex-grow: 1;
+
+/*     min-width: 400px; */
+  }
+
+  input:focus{
+    border-radius: 8px;
+    border-style: double;
+    border-color: blue;
   }
   
   button {
     padding: 5px 10px;
-    font-size: 16px;
-    background-color: orangered;
-    color: white;
+    font-size: 14px;
+    background-color: whitesmoke;
+    color: blue;
+    border: none;
+    border-radius: 8px;
+    margin-left: 10px;
+  }
+
+    
+  button:hover {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: gold;
+    cursor: pointer;
+    color: blue;
     border: none;
     border-radius: 8px;
     margin-left: 10px;
@@ -26,4 +50,34 @@
 
  i {
     padding-right: 5px;
+  }
+
+  @media screen and (max-width: 535px) {
+
+    button {
+      width: 92vw;
+      margin: 5px auto;
+      height: 7vh;
+    }
+
+    button:hover {
+      padding: 5px 10px;
+      font-size: 14px;
+      background-color: gold;
+      cursor: pointer;
+      color: blue;
+      width: 92vw;
+      border-radius: 8px;
+      margin-left: 0px;
+    }
+
+    input {
+      width: 92vw;
+      height: 7vh;
+    }
+  
+    form {
+      margin: 7px auto ;
+      width: 92vw;
+    }
   }
