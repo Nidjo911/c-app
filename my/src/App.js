@@ -1,24 +1,17 @@
+import { nanoid } from 'nanoid';
+
 import './App.css';
 /* import './App.scss'; */
 import { Messages, Input } from './Components';
 import { useState, useEffect } from 'react';
 
-/* 
-function membersName() {
-  const adjectives = ["autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark", "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter", "patient", "twilight", "dawn", "crimson", "wispy", "weathered", "blue", "billowing", "broken", "cold", "damp", "falling", "frosty", "green", "long", "late", "lingering", "bold", "little", "morning", "muddy", "old", "red", "rough", "still", "small", "sparkling", "throbbing", "shy", "wandering", "withered", "wild", "black", "young", "holy", "solitary", "fragrant", "aged", "snowy", "proud", "floral", "restless", "divine", "polished", "ancient", "purple", "lively", "nameless"];
-  const nouns = ["waterfall", "river", "breeze", "moon", "rain", "wind", "sea", "morning", "snow", "lake", "sunset", "pine", "shadow", "leaf", "dawn", "glitter", "forest", "hill", "cloud", "meadow", "sun", "glade", "bird", "brook", "butterfly", "bush", "dew", "dust", "field", "fire", "flower", "firefly", "feather", "grass", "haze", "mountain", "night", "pond", "darkness", "snowflake", "silence", "sound", "sky", "shape", "surf", "thunder", "violet", "water", "wildflower", "wave", "water", "resonance", "sun", "wood", "dream", "cherry", "tree", "fog", "frost", "voice", "paper", "frog", "smoke", "star"];
-  const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
-  const noun = nouns[Math.floor(Math.random() * nouns.length)];
-  return adjective + noun;
-
-} */
 
   function randomName() {
     const primary = 'User';
     const randomNumber = Math.floor(Math.random() * 100000);
-    console.log(randomNumber);
     return `${primary}${randomNumber}`
   }
+
 
 function randomColor() {
   return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
@@ -32,7 +25,11 @@ export default function App() {
       member: {
         color: "blue",
         username: "chatbot",
-        id: "999999"
+        clientData: {
+          username: '',
+          color: '',
+          id: nanoid()
+        }
       },
       timestamp: new Date()
     }
@@ -40,15 +37,24 @@ export default function App() {
 
   const [member] = useState({
     username: randomName(),
-    color: randomColor()
+    color: randomColor(),
+    id: nanoid()
   });
 
-  const [drone] = useState(new window.Scaledrone("ukCx6gCBe22KWrvS", {
-    data: member
-  }));
+  
+  const [drone, setDrone] = useState(null);
+
+
 
   useEffect(() => {
+    const myDrone = new window.Scaledrone("ukCx6gCBe22KWrvS", {
+      data: member
+    });
 
+    setDrone (myDrone);
+  }, [])
+
+  useEffect(() => {
     if (drone) {
 
     drone.on('open', error => {
@@ -60,14 +66,14 @@ export default function App() {
     
     room.on('message', (msssg) => {
       console.log(msssg);
-      setMessages(prevMessages => [...prevMessages, { data: msssg.data.message, member, timestamp: msssg.timestamp }]);
+      setMessages(prevMessages => [...prevMessages,
+        { data: msssg.data.message,
+          member: msssg.member.clientData,
+          timestamp: msssg.timestamp,
+          id: msssg.id
+         }]);
+      console.log([messages]);
     } )
-
-
-    /* probni dio */
-
-/*     room.on('members', function(members) {
-    }); */
 
   });
 
@@ -79,11 +85,8 @@ export default function App() {
       room: "observable-room",
       message: { message }
 
-      /* ignore ovo dolje, member vec je u messageu embeddan */
-      /*       member, message */
     });
-    
-/*     setMessages(prevMessages => [...prevMessages, { text: message, member }]); */
+
   }
 
   return (

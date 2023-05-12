@@ -6,7 +6,7 @@ export default function Messages(props) {
     const { member, data, timestamp } = message;
 
     const { currentMember } = props;
-    const messageFromMe = member.id === currentMember.id;
+    const messageFromMe = message.member.id === currentMember.id;
     const className = messageFromMe
       ? "Messages-message currentMember"
       : "Messages-message";
@@ -24,6 +24,7 @@ export default function Messages(props) {
         <div className="Message-content">
           <div className="username"> { member.username }</div>
           <span className="text">{ data }</span>
+          <span className="text">{ member.username }</span>
           <span className="text">{ formattedTimestamp }</span>
         </div>
       </li>
@@ -34,7 +35,6 @@ export default function Messages(props) {
     <ul className="Messages-list">
       
       {props.messages.map((m) => renderMessage(m ))}
-      
     </ul>
   )
 };

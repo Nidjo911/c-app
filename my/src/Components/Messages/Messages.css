@@ -1,12 +1,17 @@
   .Messages-list {
-    padding: 20px 0;
     max-width: 900px;
     width: 100%;
-    margin: 0 auto;
+    margin: 20;
     list-style: none;
-    padding-left: 0;
+    padding: 10 15 20 15;
     flex-grow: 1;
     overflow: auto;
+
+    border-style: solid;
+    background-color: yellow;
+    border-width: 3px;
+
+    border-radius: 15px;
   }
 
   .Messages-message {
@@ -18,6 +23,7 @@
     /*justify-content: flex-end;*/
     flex-direction: row-reverse;
     text-align: right;
+/*     background-color: brown; */
   }
 
   .Message-content {
