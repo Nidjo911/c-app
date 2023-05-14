@@ -8,33 +8,42 @@ export default function Messages(props) {
     const { currentMember } = props;
     const messageFromMe = message.member.id === currentMember.id;
     const className = messageFromMe
-      ? "Messages-message currentMember"
-      : "Messages-message";
+      ? "klasa-poruka trenutni-korisnik"
+      : "klasa-poruka";
 
 
-      /* potrebno je popraviti ASAP ovaj formattedTimestamp */
-    const formattedTimestamp = new Date(timestamp * 1000).toLocaleString("en-US");/* toLocaleDateString("en-US"); */
+    const formattedTimestamp = new Date(timestamp * 1000).toLocaleString("en-US");
+
+
 
     return (
       <li className={className} key={data.id}>
+
         <span
-          className="avatar"
+          className="boja-korisnika"
           style={{ backgroundColor: member.color }}
         />
-        <div className="Message-content">
-          <div className="username"> { member.username }</div>
-          <span className="text">{ data }</span>
-          <span className="text">{ member.username }</span>
-          <span className="text">{ formattedTimestamp }</span>
+
+        <div className="sadrzaj-poruke">
+          <div className="korisnicko-ime"> { member.username }</div>
+          <span className="tekst-poruke">{ data }</span>
+
+          {!! timestamp && 
+          <span className="tekst-poruke">{ formattedTimestamp }</span>  }
         </div>
+      
       </li>
+
     );
   };
 
   return (
-    <ul className="Messages-list">
+    <>
+
+    <ul className="popis-poruka">
       
       {props.messages.map((m) => renderMessage(m ))}
     </ul>
+    </>
   )
 };

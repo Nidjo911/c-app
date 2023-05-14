@@ -1,4 +1,4 @@
-  .Messages-list {
+  .popis-poruka {
     margin: 7px auto;
     background-color: yellow;
     padding: 7px 2%;
@@ -11,27 +11,27 @@
     border-radius: 10px;
   }
 
-  .Messages-message {
+  .klasa-poruka {
     display: flex;
     margin-top: 2%;
   }
 
-  .Messages-message.currentMember {
+  .klasa-poruka.trenutni-korisnik {
     justify-content: flex-start;
     flex-direction: row-reverse;
     text-align: right;
     font-weight: 600;
   }
 
-  .Message-content {
+  .sadrzaj-poruke {
     display: inline-block;
   }
 
-  .currentMember>.Message-content {
+  .trenutni-korisnik>.sadrzaj-poruke {
     align-items: flex-end;
   }
 
-  .Messages-message>.avatar {
+  .klasa-poruka>.boja-korisnika {
     height: 35px;
     width: 35px;
     border-radius: 50%;
@@ -39,14 +39,14 @@
     margin: 0 10px -10px;
   }
 
-  .Message-content>.username {
+  .sadrzaj-poruke>.korisnicko-ime {
     display: block;
     color: darkslategrey;
     font-size: 14px;
     padding-bottom: 4px;
   }
 
-  .Message-content>.text {
+  .sadrzaj-poruke>.tekst-poruke {
 /*     font-size: 14px; */
     font-size: 4vw;
     padding: 10px;
@@ -58,7 +58,7 @@
     display: inline-block;
   }
 
-  .currentMember>.Message-content .text {
+  .trenutni-korisnik>.sadrzaj-poruke .tekst-poruke {
     background-color: olivedrab;
 
   }
@@ -66,35 +66,35 @@
 
   @media screen and (min-width: 401px) and (max-width: 600px){
   
-    .Message-content>.text {
+    .sadrzaj-poruke>.tekst-poruke {
           font-size: 2.7vw;
         }
   }
 
   @media screen and (min-width: 600px) and (max-width: 800px) {
   
-    .Message-content>.text {
+    .sadrzaj-poruke>.tekst-poruke {
           font-size: 2vw;
         }
   }
 
   @media screen and (min-width: 800px) and (max-width: 940px) {
   
-    .Message-content>.text {
+    .sadrzaj-poruke>.tekst-poruke {
           font-size: 1.7vw;
         }
   }
 
   @media screen and (min-width: 940px) and (max-width: 1100px) {
   
-    .Message-content>.text {
+    .sadrzaj-poruke>.tekst-poruke {
           font-size: 1.4vw;
         }
   }
 
   @media screen and (min-width: 1100px) {
   
-    .Message-content>.text {
+    .sadrzaj-poruke>.tekst-poruke {
           font-size: 1.2vw;
         }
   }

@@ -18,6 +18,7 @@ function randomColor() {
 
 export default function App() {
 
+
   const [messages, setMessages] = useState([
     {
       data: "Welcome to chat app!",
@@ -27,10 +28,10 @@ export default function App() {
         clientData: {
           username: '',
           color: '',
-          id: nanoid()
+          id: nanoid(),
         }
       },
-      timestamp: new Date()
+
     }
   ]);
 
@@ -79,10 +80,10 @@ export default function App() {
 
     room.on("member_join", function (member) {
       setMessages(prevMessages => [...prevMessages,
-        { data: 'joined the chat',
+        { data: `User has joined the chat`,
           member: member.clientData,
-          timestamp: null,
-          id: nanoid()
+          timestamp: false,
+          id: nanoid(),
          }]);
         
         })
@@ -92,10 +93,10 @@ export default function App() {
         room.on("member_leave", function (member) {
 
           setMessages(prevMessages => [...prevMessages,
-            { data: 'has left the chat',
+            { data: `${member.username} has left the chat`,
               member: member.clientData,
-              timestamp: null,
-              id: nanoid()
+              timestamp: false,
+              id: nanoid(),
              }]);
             
             })
@@ -114,7 +115,7 @@ export default function App() {
   }
 
   return (
-    <div className='App'>
+    <div className='Aplikacija'>
 
       <div className='App-header'>
         <h1>My Chat App</h1>
