@@ -14,8 +14,6 @@ export default function Messages(props) {
 
     const formattedTimestamp = new Date(timestamp * 1000).toLocaleString("en-US");
 
-    console.log(currentMember)
-
     return (
       <li className={className} key={data.id}>
 

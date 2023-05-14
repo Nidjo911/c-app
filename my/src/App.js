@@ -30,7 +30,7 @@ export default function App() {
           color: '',
           id: nanoid(),
         }
-      },
+      }
 
     }
   ]);
@@ -44,8 +44,6 @@ export default function App() {
 
   const [drone, setDrone] = useState(null);
 
-  const [chatters, setChatters] = useState({});
-
 
   useEffect(() => {
     const myDrone = new window.Scaledrone("ukCx6gCBe22KWrvS", {
@@ -58,6 +56,7 @@ export default function App() {
   }, [])
 
   useEffect(() => {
+
     if (drone) {
 
       drone.on('open', error => {
@@ -66,6 +65,8 @@ export default function App() {
         }
 
         const room = drone.subscribe("observable-room");
+
+        let arrMem = [member.username];
 
         room.on('message', (msssg) => {
           console.log(msssg);
@@ -76,7 +77,6 @@ export default function App() {
             timestamp: msssg.timestamp,
             id: msssg.id
           }]);
-          console.log([messages]);
         })
 
         room.on("member_join", function (member) {
@@ -88,9 +88,10 @@ export default function App() {
             id: nanoid(),
           }]);
 
-        })
-
-        /* room on member join - kraj */
+          let newUser = member.clientData.username;
+          arrMem.push(newUser);
+          console.log(arrMem);
+        });
 
         room.on("member_leave", function (member) {
 
@@ -102,6 +103,9 @@ export default function App() {
             id: nanoid(),
           }]);
 
+          let leftUser = member.clientData.username;
+
+          arrMem = arrMem.filter(a => a !== leftUser);
         })
       });
 
@@ -120,7 +124,7 @@ export default function App() {
   return (
 
     <div className='Aplikacija'>
-      <Header currentMember={member}/>
+      <Header currentMember={member} />
       <Messages messages={messages} currentMember={member} />
       <Input onSendMessage={onSendMessage} />
     </div>
