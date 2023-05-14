@@ -5,11 +5,11 @@ import { Messages, Input, Header } from './Components';
 import { useState, useEffect } from 'react';
 
 
-  function randomName() {
-    const primary = 'User';
-    const randomNumber = Math.floor(Math.random() * 100000);
-    return `${primary}${randomNumber}`
-  }
+function randomName() {
+  const primary = 'User';
+  const randomNumber = Math.floor(Math.random() * 100000);
+  return `${primary}${randomNumber}`
+}
 
 
 function randomColor() {
@@ -41,10 +41,10 @@ export default function App() {
     id: nanoid()
   });
 
-  
+
   const [drone, setDrone] = useState(null);
 
-  const [chatters, setChatters] = useState ({});
+  const [chatters, setChatters] = useState({});
 
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function App() {
       data: member
     });
 
-    setDrone (myDrone);
+    setDrone(myDrone);
 
 
   }, [])
@@ -60,49 +60,52 @@ export default function App() {
   useEffect(() => {
     if (drone) {
 
-    drone.on('open', error => {
-      if (error) {
-        return console.error(error);
-      }
+      drone.on('open', error => {
+        if (error) {
+          return console.error(error);
+        }
 
-    const room = drone.subscribe("observable-room");
-    
-    room.on('message', (msssg) => {
-      console.log(msssg);
-      setMessages(prevMessages => [...prevMessages,
-        { data: msssg.data.message,
-          member: msssg.member.clientData,
-          timestamp: msssg.timestamp,
-          id: msssg.id
-         }]);
-      console.log([messages]);
-    } )
+        const room = drone.subscribe("observable-room");
 
-    room.on("member_join", function (member) {
-      setMessages(prevMessages => [...prevMessages,
-        { data: `User has joined the chat`,
-          member: member.clientData,
-          timestamp: false,
-          id: nanoid(),
-         }]);
-        
+        room.on('message', (msssg) => {
+          console.log(msssg);
+          setMessages(prevMessages => [...prevMessages,
+          {
+            data: msssg.data.message,
+            member: msssg.member.clientData,
+            timestamp: msssg.timestamp,
+            id: msssg.id
+          }]);
+          console.log([messages]);
+        })
+
+        room.on("member_join", function (member) {
+          setMessages(prevMessages => [...prevMessages,
+          {
+            data: `${member.clientData.username} has joined the chat`,
+            member: member.clientData,
+            timestamp: false,
+            id: nanoid(),
+          }]);
+
         })
 
         /* room on member join - kraj */
-    
+
         room.on("member_leave", function (member) {
 
           setMessages(prevMessages => [...prevMessages,
-            { data: `${member.username} has left the chat`,
-              member: member.clientData,
-              timestamp: false,
-              id: nanoid(),
-             }]);
-            
-            })
-  });
+          {
+            data: `${member.clientData.username} has left the chat`,
+            member: member.clientData,
+            timestamp: false,
+            id: nanoid(),
+          }]);
 
-  }
+        })
+      });
+
+    }
   }, [drone]);
 
   const onSendMessage = (message) => {
@@ -115,12 +118,9 @@ export default function App() {
   }
 
   return (
-    <div className='Aplikacija'>
 
-      <div className='App-header'>
-        <h1>My Chat App</h1>
-      </div>
-      <Header />
+    <div className='Aplikacija'>
+      <Header currentMember={member}/>
       <Messages messages={messages} currentMember={member} />
       <Input onSendMessage={onSendMessage} />
     </div>

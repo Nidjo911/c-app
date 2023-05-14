@@ -1,4 +1,8 @@
-  form {
+* {
+  box-sizing: border-box;
+}
+
+form {
     display: flex;
     width: 90vw;
     justify-content: space-between;
@@ -6,6 +10,8 @@
     margin: 7px auto 40px;
 
     flex-wrap: wrap;
+
+    flex-shrink: 0;
   }
   
   input {
@@ -15,9 +21,8 @@
     border-radius: 8px;
 
     border: 1px solid darkgray;
-    flex-grow: 1;
+    flex-grow: 0.95;
 
-/*     min-width: 400px; */
   }
 
   input:focus{
@@ -28,24 +33,33 @@
   
   button {
     padding: 5px 10px;
-    font-size: 14px;
+    margin-left: 20px;
     background-color: whitesmoke;
     color: blue;
     border: none;
     border-radius: 8px;
-    margin-left: 10px;
+    
+    width: 85px;
+
+    flex-shrink: 0;
   }
 
     
   button:hover {
     padding: 5px 10px;
+    margin-left: 0px;
     font-size: 14px;
     background-color: gold;
     cursor: pointer;
     color: blue;
     border: none;
     border-radius: 8px;
-    margin-left: 10px;
+    width: 85px;
+
+    line-height: 24px;
+    flex-shrink: 0;
+
+    font-size: 16px;
   }
 
  i {
@@ -68,12 +82,26 @@
       color: blue;
       width: 92vw;
       border-radius: 8px;
-      margin-left: 0px;
+      border: none;
+
+      line-height: 24px;
+
+      font-size: 16px;
     }
 
     input {
       width: 92vw;
       height: 7vh;
+
+        padding: 7px;
+    
+        font-size: 15px;
+        border-radius: 8px;
+    
+        border: 1px solid darkgray;
+        flex-grow: 1;
+    
+      
     }
   
     form {
