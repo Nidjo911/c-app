@@ -1,0 +1,33 @@
+.list-inline {
+	list-style: none;
+	margin-left: 12vw;
+	margin-right: -0.5em;
+	padding-left: 0;
+
+	direction: rtl;
+	display: flex;
+	justify-content: flex-end;
+}
+
+
+
+.textie-text {
+	margin-left: 10vw;
+}
+
+.list-inline > li {
+	display: inline-block;
+	margin-left: 0.3em;
+	margin-right: 0.5em;
+	justify-content: center;
+	background-color: lightyellow;
+	border-radius: 12px;
+	border-style: solid 10px darkgrey;
+	border: 10px;
+/* 	text-shadow: 0.2px 0.2px 20px #000000; */
+	padding: 5px;
+}
+
+.list-inline > li:before {
+	position: absolute;
+}

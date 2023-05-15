@@ -1,8 +1,5 @@
 import { useState } from 'react';
 import './Input.css';
-/* import { Button } from 'bootstrap'; */
-
-
 
 export default function Input(props) {
   const [text, setText] = useState("");
@@ -25,7 +22,7 @@ export default function Input(props) {
           onChange={onChange}
           value={text}
           type="text"
-          placeholder="Enter your message and press ENTER"
+          placeholder="Write a message..."
           autoFocus
         />
         <button><i class="bi bi-send"></i>Send</button>

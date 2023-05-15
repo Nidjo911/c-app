@@ -1,6 +1,56 @@
-.header {
-    background-color: green;
-    overflow: visible;
-    width: 100%;
-    text-align: center;
+  .bi-box-arrow-right {
+
+    color: whitesmoke;
+    font-size: 16px;
+  }
+
+  .btnexit {
+    padding: 5px 10px;
+    margin-left: 0px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+
+    background-color: orangered;
+    width: 35px;
+    margin-right: 10px;
+
+    line-height: 24px;
+    flex-shrink: 0;
+
+    font-size: 16px;
+  }
+
+  .btnexit:hover {
+    background-color: darkred;
+    padding: 5px 10px;
+    margin-left: 0px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    width: 35px;
+    margin-right: 10px;
+
+    line-height: 24px;
+    flex-shrink: 0;
+
+    font-size: 16px;
+
+  }
+
+  .btnexit:active {
+    background-color: darkkhaki;
+    padding: 5px 10px;
+    margin-left: 0px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    width: 35px;
+    margin-right: 10px;
+
+    line-height: 24px;
+    flex-shrink: 0;
+
+    font-size: 16px;
+
   }

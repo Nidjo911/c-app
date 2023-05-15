@@ -3,7 +3,7 @@ import './Messages.css';
 export default function Messages(props) {
 
   function renderMessage(message) {
-    const { member, data, timestamp } = message;
+    const { member, data, timestamp, id } = message;
 
     const { currentMember } = props;
     const messageFromMe = message.member.id === currentMember.id;
@@ -15,7 +15,7 @@ export default function Messages(props) {
     const formattedTimestamp = new Date(timestamp * 1000).toLocaleString("en-US");
 
     return (
-      <li className={className} key={data.id}>
+      <li className={className} key={data.id ?? id}>
 
         <span
           className="boja-korisnika"
