@@ -1,23 +1,21 @@
 import { nanoid } from 'nanoid';
 import './App.css';
-/* import './App.scss'; */
 import { Messages, Input, Header } from './Components';
 import { useState, useEffect } from 'react';
 
-
-function randomName() {
-  const primary = 'User';
-  const randomNumber = Math.floor(Math.random() * 100000);
-  return `${primary}${randomNumber}`
-}
-
-
-function randomColor() {
-  return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
-}
-
 export default function App() {
 
+  function randomName() {
+    const primary = 'User';
+    const randomNumber = Math.floor(Math.random() * 100000);
+    return `${primary}${randomNumber}`
+  }
+
+  function randomColor() {
+    return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
+  }
+
+  const [membersArr, setmembersArr] = useState([]);
 
   const [messages, setMessages] = useState([
     {
@@ -46,17 +44,16 @@ export default function App() {
 
 
   useEffect(() => {
-    const myDrone = new window.Scaledrone("ukCx6gCBe22KWrvS", {
+    const myDrone = new window.Scaledrone("s5gXuXATfV67AugL", {
       data: member
     });
 
     setDrone(myDrone);
 
-
   }, [])
 
-  useEffect(() => {
 
+  useEffect(() => {
     if (drone) {
 
       drone.on('open', error => {
@@ -65,10 +62,7 @@ export default function App() {
         }
 
         const room = drone.subscribe("observable-room");
-
-        let arrMem = [member.username];
-
-        room.on('message', (msssg) => {
+        room.on("message", (msssg) => {
           console.log(msssg);
           setMessages(prevMessages => [...prevMessages,
           {
@@ -77,6 +71,11 @@ export default function App() {
             timestamp: msssg.timestamp,
             id: msssg.id
           }]);
+        })
+
+        room.on('member_join', function (member) {
+          setmembersArr(prev => [...prev, { mmbh: member.clientData.username }]);
+          console.log(membersArr);
         })
 
         room.on("member_join", function (member) {
@@ -88,9 +87,6 @@ export default function App() {
             id: nanoid(),
           }]);
 
-          let newUser = member.clientData.username;
-          arrMem.push(newUser);
-          console.log(arrMem);
         });
 
         room.on("member_leave", function (member) {
@@ -103,9 +99,6 @@ export default function App() {
             id: nanoid(),
           }]);
 
-          let leftUser = member.clientData.username;
-
-          arrMem = arrMem.filter(a => a !== leftUser);
         })
       });
 
@@ -116,7 +109,6 @@ export default function App() {
     drone.publish({
       room: "observable-room",
       message: { message }
-
     });
 
   }
@@ -128,6 +120,7 @@ export default function App() {
       <Messages messages={messages} currentMember={member} />
       <Input onSendMessage={onSendMessage} />
     </div>
+
   );
 
 }
